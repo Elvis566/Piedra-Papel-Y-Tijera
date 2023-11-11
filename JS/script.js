@@ -8,6 +8,7 @@ const miTijera =document.getElementById("mitijera");
 var eleccionJugador;
 var lanzamientoBoot;
 var puntos=[0, 0, 0];
+var manoBoot;
 
 
 miPiedra.addEventListener("click", function(){
@@ -36,7 +37,7 @@ function Jugar(){
         case 2 : lanzamientoBoot="tijera";
         break;
     }
-    var manoBoot =eleccion[contadorEleccion];
+    manoBoot =eleccion[contadorEleccion];
     jugadaBoot.src=manoBoot;
     console.log(jugadaBoot);
     
@@ -78,5 +79,7 @@ function finDePartida(){
         for(let i = 0; i<3; i++){
             puntos[i]=0;
         }
+        logoBoot.src=reaccionBoot[0];
+        jugadaBoot.src="../img/ppt.jpg";
     }
 }

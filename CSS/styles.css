@@ -6,9 +6,22 @@ body{
     flex-direction: column;
     min-height: 100vh;
 }
-.container {
-}
 
-.seleccionBoot{
-    background-color: red;
-}
+    .jugador button{
+        width: 230px;
+        height: 170px;
+        margin: 0 15px;
+    }
+   .boot{
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items:center;
+     margin-bottom: 25px;
+    }
+    .boot img{
+        width: 200px;
+        height: 150px;
+        margin: 20px;
+    }
+
