@@ -1,8 +1,14 @@
-const eleccion = ["piedra","papel","tijera"];
+const reaccionBoot = ["../img/boot/inicio.gif", "../img/boot/burlando.gif", "../img/boot/molesto.gif", "../img/boot/perdido.gif", "../img/boot/triste.gif"];
+const eleccion = ["../img/piedra.jpg", "../img/papel.jpg", "../img/tijera.jpg"]
+const jugadaBoot = document.querySelector(".eleccionB")
+const logoBoot = document.querySelector(".logoBoot")
 const miPiedra =document.getElementById("mipiedra");
 const miPapel =document.getElementById("mipapel");
 const miTijera =document.getElementById("mitijera");
 var eleccionJugador;
+var lanzamientoBoot;
+var puntos=[0, 0, 0];
+
 
 miPiedra.addEventListener("click", function(){
     eleccionJugador ="piedra"
@@ -20,32 +26,57 @@ miTijera.addEventListener("click", function(){
     Jugar()
 });
 function Jugar(){
-   
+
     let contadorEleccion = Math.floor(Math.random()*3);
-    var jugadaBoot =eleccion[contadorEleccion];
-    let idB = document.getElementById(`${jugadaBoot}`);
+    switch(contadorEleccion){
+        case 0 : lanzamientoBoot="piedra";
+        break;
+        case 1 : lanzamientoBoot="papel";
+        break;
+        case 2 : lanzamientoBoot="tijera";
+        break;
+    }
+    var manoBoot =eleccion[contadorEleccion];
+    jugadaBoot.src=manoBoot;
     console.log(jugadaBoot);
     
-    if(!idB.classList.contains("seleccionBoot")){
-        idB.classList.remove("seleccionBoot");
-        idB.classList.add("seleccionBoot");
-    }
     
-    ReglasJuego(eleccionJugador,jugadaBoot);
+    ReglasJuego(eleccionJugador,lanzamientoBoot);
 
 
 }
-
-function ReglasJuego(eleccionJugador,jugadaBoot){
-    if (eleccionJugador === jugadaBoot) {
+// El siguiente metodo tiene un funcionamiento sencillo que abarca las reglas del casico juego de piedras papel y tijera
+function ReglasJuego(eleccionJugador,lanzamientoBoot){
+    if (eleccionJugador === lanzamientoBoot) {
         console.log("Empate");
+        logoBoot.src=reaccionBoot[0];
+        puntos[2]++;
     } else if (
-        (eleccionJugador === "piedra" && jugadaBoot === "tijera") ||
-        (eleccionJugador === "papel" && jugadaBoot === "piedra") ||
-        (eleccionJugador === "tijera" && jugadaBoot === "papel")
+        (eleccionJugador === "piedra" && lanzamientoBoot === "tijera") ||
+        (eleccionJugador === "papel" && lanzamientoBoot === "piedra") ||
+        (eleccionJugador === "tijera" && lanzamientoBoot === "papel")
     ) {
         console.log("¡Ganaste!");
+        logoBoot.src=reaccionBoot[2];
+        puntos[0]++;
     } else {
         console.log("¡Perdiste!");
+        logoBoot.src=reaccionBoot[1];
+        puntos[1]++;
+    }
+
+    finDePartida();
+}
+
+function finDePartida(){
+    if(puntos[0]>=3 || puntos[1]>=3){
+        if(puntos[0]>=3){
+            alert('Gano el jugador');
+        }else{
+            alert('Gano el boot');
+        }
+        for(let i = 0; i<3; i++){
+            puntos[i]=0;
+        }
     }
 }
