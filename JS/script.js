@@ -9,6 +9,7 @@ var eleccionJugador;
 var lanzamientoBoot;
 var puntos=[0, 0, 0];
 var manoBoot;
+var nombreJugador = document.getElementById("nombre")
 
 
 miPiedra.addEventListener("click", function(){
@@ -26,6 +27,13 @@ miTijera.addEventListener("click", function(){
     console.log(eleccionJugador+"es del jugador");
     Jugar()
 });
+
+function comenzar(){
+    document.querySelector(".inicio").style.display="none"
+}
+function finalizar(){
+    document.querySelector(".inicio").style.display="block"
+}
 function Jugar(){
 
     let contadorEleccion = Math.floor(Math.random()*3);
@@ -72,7 +80,7 @@ function ReglasJuego(eleccionJugador,lanzamientoBoot){
 function finDePartida(){
     if(puntos[0]>=3 || puntos[1]>=3){
         if(puntos[0]>=3){
-            alert('Gano el jugador');
+            alert('Ganaste '+nombreJugador.value);
         }else{
             alert('Gano el boot');
         }
@@ -81,5 +89,6 @@ function finDePartida(){
         }
         logoBoot.src=reaccionBoot[0];
         jugadaBoot.src="../img/ppt.jpg";
+        finalizar();
     }
 }
